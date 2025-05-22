@@ -24,13 +24,13 @@
       --text-primary: #e8eaed; /* لون النص الأساسي */
       --text-secondary: #9aa0a6; /* لون النص الثانوي */
       --text-on-primary: #ffffff; /* لون النص على الخلفيات الملونة باللون الأساسي */
-      
+
       --border-color: #3a3f42; /* لون الحدود */
       --border-color-light: #4a4f52; /* لون حدود أفتح قليلاً */
-      
+
       --success-color: #34a853;
       --error-color: #ea4335;
-      
+
       --user-message-bg: var(--primary-color);
       --bot-message-bg: var(--bg-surface-raised);
 
@@ -38,7 +38,7 @@
       --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
       --shadow-md: 0 4px 8px rgba(0,0,0,0.35);
       --shadow-lg: 0 10px 20px rgba(0,0,0,0.4);
-      
+
       --border-radius-sm: 6px;
       --border-radius-md: 8px;
       --border-radius-lg: 12px;
@@ -68,7 +68,7 @@
     }
 
     html, body {
-      height: 100%; 
+      height: 100%;
       font-smooth: antialiased;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -80,20 +80,20 @@
       justify-content: center;
       align-items: center;
       color: var(--text-primary);
-      overflow: hidden; 
+      overflow: hidden; /* لمنع أي تمرير على مستوى الصفحة نفسها */
     }
 
     .container {
       width: 100%;
-      max-width: 760px; 
-      height: 100vh; 
-      background: var(--bg-main);
-      border: 1px solid var(--border-color);
-      border-radius: var(--border-radius-lg);
+      max-width: 760px; /* سيظل هذا مهمًا للشاشات الأكبر من الهاتف */
+      height: 100vh; /* أو 100dvh لمراعاة واجهات المتصفح الديناميكية على الهاتف بشكل أفضل */
+      background: var(--bg-main); /*ابقِ هذا حتى لو كان نفس لون الجسم، للمرونة المستقبلية*/
+      /* border: 1px solid var(--border-color); /* قد ترغب في إزالة هذا إذا كنت تريد أن يندمج مع حافة الشاشة تمامًا على الهاتف */
+      /* border-radius: var(--border-radius-lg); /* قد ترغب في جعل هذا 0 على الهاتف إذا كان يملأ الشاشة تمامًا */
       display: flex;
       flex-direction: column;
-      overflow: hidden;
-      box-shadow: var(--shadow-lg);
+      overflow: hidden; /* مهم لمنع تجاوز المحتوى للحاوية */
+      box-shadow: var(--shadow-lg); /* هذا جيد للاحتفاظ به */
     }
 
     .header {
@@ -104,17 +104,21 @@
       display: flex;
       align-items: center;
       gap: 0.7rem;
-      position: relative;
+      position: relative; /* مهم لـ .delete-all-btn */
       border-bottom: 1px solid var(--border-color);
       box-shadow: var(--shadow-sm);
+      flex-shrink: 0; /* لمنع الهيدر من التقلص */
     }
 
     .header h1 {
-      font-size: 1.3rem; 
+      font-size: 1.3rem;
       flex: 1;
       font-weight: 700;
-      color: var(--primary-color); 
+      color: var(--primary-color);
       letter-spacing: 0.5px;
+      white-space: nowrap; /* لمنع التفاف العنوان إذا كان طويلاً */
+      overflow: hidden;
+      text-overflow: ellipsis; /* لإضافة ... إذا كان العنوان أطول من المساحة */
     }
 
     .header .fas.fa-robot {
@@ -130,11 +134,11 @@
 
     .delete-all-btn {
       position: absolute;
-      left: 15px; 
+      left: 15px;
       cursor: pointer;
       transition: color 0.2s ease-in-out, transform 0.2s ease;
       color: var(--text-secondary);
-      font-size: 1.2rem; 
+      font-size: 1.2rem;
     }
 
     .delete-all-btn:hover {
@@ -143,14 +147,14 @@
     }
 
     .chat-container {
-      flex: 1;
-      padding: 1rem 0.7rem; 
-      overflow-y: auto;
+      flex: 1; /* يأخذ المساحة المتبقية */
+      padding: 1rem 0.7rem;
+      overflow-y: auto; /* يسمح بالتمرير العمودي للرسائل */
       background: var(--bg-main);
     }
 
     .message {
-      margin-bottom: 1.1rem; 
+      margin-bottom: 1.1rem;
       display: flex;
       flex-direction: column;
       animation: messageAppear 0.4s ease-out;
@@ -162,14 +166,14 @@
     }
 
     .message-header {
-      font-size: 0.65rem; 
+      font-size: 0.65rem;
       color: var(--text-secondary);
       margin-bottom: 0.25rem;
       display: flex;
       align-items: center;
       gap: 6px;
       font-weight: 500;
-      padding: 0 5px; 
+      padding: 0 5px;
     }
 
     .message-header span {
@@ -178,10 +182,10 @@
 
     .delete-btn {
       color: var(--text-secondary);
-      font-size: 0.75rem; 
+      font-size: 0.75rem;
       cursor: pointer;
       transition: color 0.2s, transform 0.2s;
-      opacity: 0.5; 
+      opacity: 0.5;
     }
 
     .delete-btn:hover {
@@ -194,7 +198,7 @@
       align-items: flex-end;
     }
     .message.user .message-header {
-      flex-direction: row-reverse; 
+      flex-direction: row-reverse;
     }
 
     .message.bot {
@@ -205,9 +209,9 @@
     }
 
     .bubble {
-      max-width: 78%; 
-      padding: 0.75rem 1rem; 
-      border-radius: var(--border-radius-md); 
+      max-width: 78%; /* جيد جداً للتجاوب */
+      padding: 0.75rem 1rem;
+      border-radius: var(--border-radius-md);
       word-wrap: break-word;
       white-space: pre-wrap;
       line-height: 1.6;
@@ -218,13 +222,13 @@
     .message.user .bubble {
       background: var(--user-message-bg);
       color: var(--text-on-primary);
-      border-bottom-right-radius: var(--border-radius-sm); 
+      border-bottom-right-radius: var(--border-radius-sm);
     }
 
     .message.bot .bubble {
       background: var(--bot-message-bg);
       color: var(--text-primary);
-      border-bottom-left-radius: var(--border-radius-sm); 
+      border-bottom-left-radius: var(--border-radius-sm);
     }
 
     .message:hover .bubble {
@@ -235,19 +239,19 @@
     .message-actions {
       margin-top: 6px;
       display: flex;
-      gap: 5px; 
-      padding: 0 5px; 
+      gap: 5px;
+      padding: 0 5px;
     }
-    .message.user .message-actions { 
+    .message.user .message-actions {
         justify-content: flex-end;
     }
 
     .message-actions button {
-      background: transparent; 
-      border: 1px solid var(--border-color-light); 
+      background: transparent;
+      border: 1px solid var(--border-color-light);
       cursor: pointer;
-      font-size: 0.9rem; 
-      padding: 4px 7px; 
+      font-size: 0.9rem;
+      padding: 4px 7px;
       color: var(--text-secondary);
       transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
       border-radius: var(--border-radius-sm);
@@ -272,24 +276,25 @@
 
     .chat-input {
       display: flex;
-      align-items: flex-end; 
+      align-items: flex-end;
       border-top: 1px solid var(--border-color);
-      padding: 0.6rem 0.75rem; 
-      background: var(--bg-surface); 
-      gap: 0.6rem; 
+      padding: 0.6rem 0.75rem;
+      background: var(--bg-surface);
+      gap: 0.6rem;
+      flex-shrink: 0; /* لمنع منطقة الإدخال من التقلص */
     }
 
     .chat-input textarea {
-      flex: 1;
-      padding: 0.7rem 1rem; 
+      flex: 1; /* يأخذ المساحة المتاحة */
+      padding: 0.7rem 1rem;
       border: 1px solid var(--border-color);
       resize: none;
       font-size: 0.9rem;
       outline: none;
-      border-radius: var(--border-radius-xl); 
+      border-radius: var(--border-radius-xl);
       background: var(--bg-input);
       color: var(--text-primary);
-      max-height: 110px; 
+      max-height: 110px; /* هذا جيد للتحكم في الارتفاع */
       line-height: 1.55;
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -302,21 +307,21 @@
         box-shadow: 0 0 0 3px var(--primary-glow-color);
      }
 
-    .chat-input button, 
+    .chat-input button,
     .upload-btn {
       background: var(--primary-color);
       border: none;
       color: var(--text-on-primary);
-      width: 40px; 
+      width: 40px;
       height: 40px;
-      border-radius: 50%; 
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1rem; 
+      font-size: 1rem;
       transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-      flex-shrink: 0; 
+      flex-shrink: 0; /* لمنع الأزرار من التقلص */
     }
     .chat-input button:hover,
     .upload-btn:hover {
@@ -336,20 +341,21 @@
 
     .status {
       text-align: center;
-      padding: 0.3rem; 
-      font-size: 0.75rem; 
+      padding: 0.3rem;
+      font-size: 0.75rem;
       background-color: var(--bg-surface);
       color: var(--text-secondary);
       border-top: 1px solid var(--border-color);
-      min-height: 26px; 
+      min-height: 26px;
       transition: color 0.3s ease;
+      flex-shrink: 0; /* لمنع شريط الحالة من التقلص */
     }
 
     .status.success { color: var(--success-color); font-weight: 500; }
     .status.error { color: var(--error-color); font-weight: 500; }
 
     a {
-      color: var(--primary-color); 
+      color: var(--primary-color);
       text-decoration: none;
       word-break: break-all;
       font-weight: 500;
@@ -357,17 +363,18 @@
 
     a:hover {
       text-decoration: underline;
-      color: hsl(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 10%)); 
+      color: hsl(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 10%));
     }
 
     .search-log {
       text-align: center;
-      font-size: 0.7rem; 
+      font-size: 0.7rem;
       color: var(--text-secondary);
-      opacity: 0.6; 
-      padding: 0.15rem 0; 
+      opacity: 0.6;
+      padding: 0.15rem 0;
       border-top: 1px dashed var(--border-color-light);
       background-color: var(--bg-main);
+      flex-shrink: 0; /* لمنع سجل البحث من التقلص */
     }
 
     .toggle-details-btn {
@@ -378,16 +385,76 @@
       background: none;
       padding: 0;
       margin-top: 8px;
-      display: block; 
-      text-align: right; 
+      display: block;
+      text-align: right;
       font-size: 0.85rem;
       transition: color 0.2s ease;
     }
 
     .toggle-details-btn:hover {
-      color: hsl(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 10%)); 
+      color: hsl(var(--primary-hue), var(--primary-saturation), calc(var(--primary-lightness) + 10%));
       text-decoration: underline;
     }
+
+    /* تعديل/إضافة: Media Query لتحسين العرض على الشاشات الصغيرة */
+    @media (max-width: 768px) { /* للهواتف والأجهزة اللوحية الصغيرة */
+        .container {
+            /* إذا كنت ترغب في أن يملأ الحواف تمامًا بدون أي حدود دائرية على الهاتف */
+            /* border-radius: 0; */
+            /* box-shadow: none; /* إذا كان ملء الشاشة، قد لا تحتاج إلى ظل */
+            /* border: none; */
+        }
+    }
+
+    @media (max-width: 420px) { /* للهواتف الصغيرة جدًا */
+        .header {
+            padding: 0.6rem 0.8rem;
+            gap: 0.5rem;
+        }
+        .header h1 {
+            font-size: 1.1rem; /* تصغير عنوان الهيدر قليلاً */
+        }
+        .header .fas.fa-robot {
+            font-size: 1.4rem;
+        }
+        .delete-all-btn {
+            font-size: 1.1rem;
+            left: 10px; /* تقريب زر الحذف قليلاً */
+        }
+
+        .chat-container {
+            padding: 0.8rem 0.5rem; /* تقليل الحشو الجانبي للرسائل */
+        }
+        .bubble {
+            padding: 0.65rem 0.85rem; /* تقليل حشو الفقاعات */
+            max-width: 85%; /* السماح للفقاعات بأن تكون أعرض قليلاً إذا لزم الأمر */
+        }
+        .message-header {
+            font-size: 0.6rem;
+        }
+
+        .chat-input {
+            padding: 0.5rem 0.6rem; /* تقليل حشو منطقة الإدخال */
+            gap: 0.5rem;
+        }
+        .chat-input textarea {
+            padding: 0.6rem 0.8rem; /* تقليل حشو مربع النص */
+            font-size: 0.85rem;
+        }
+        .chat-input button, .upload-btn {
+            width: 36px; /* تصغير الأزرار قليلاً */
+            height: 36px;
+            font-size: 0.9rem;
+        }
+        .message-actions button {
+            padding: 3px 6px;
+            font-size: 0.8rem;
+        }
+        .status, .search-log {
+            font-size: 0.7rem; /* تصغير خط الحالة وسجل البحث */
+        }
+    }
+
   </style>
 </head>
 <body>
@@ -414,380 +481,402 @@
     </div>
   </div>
 
-  <script> 
-    const apiKey = "AIzaSyBUqzhaui0pz0PqhCsVEpQYfOHsCYKtPBk"; // تحذير: قم بإخفاء هذا المفتاح في بيئة الإنتاج! 
-    const chatContainer = document.getElementById("chatContainer"); 
-    const statusBar = document.getElementById("statusBar"); 
-    const searchLog = document.getElementById("searchLog"); 
-    const userInput = document.getElementById("userInput"); 
-    const botNameElement = document.getElementById("botName"); 
+  <script>
+    // ... (نفس كود جافاسكريبت بدون تغيير) ...
+    const apiKey = "AIzaSyBUqzhaui0pz0PqhCsVEpQYfOHsCYKtPBk"; // تحذير: قم بإخفاء هذا المفتاح في بيئة الإنتاج!
+    const chatContainer = document.getElementById("chatContainer");
+    const statusBar = document.getElementById("statusBar");
+    const searchLog = document.getElementById("searchLog");
+    const userInput = document.getElementById("userInput");
+    const botNameElement = document.getElementById("botName");
 
-    const botName = "سيف AI"; 
-    const localStorageKeyMessages = "saifAiChatHistory"; 
-    const localStorageKeyAdCounter = "saifAiAdCounter"; 
+    const botName = "سيف AI";
+    const localStorageKeyMessages = "saifAiChatHistory";
+    const localStorageKeyAdCounter = "saifAiAdCounter";
 
-    let messages = []; 
-    let successfulResponseCount = 0; 
-    let statusTimeout; 
+    let messages = [];
+    let successfulResponseCount = 0;
+    let statusTimeout;
 
-    function initializeApp() { 
-        const storedAdCount = localStorage.getItem(localStorageKeyAdCounter); 
-        if (storedAdCount) { 
-            successfulResponseCount = parseInt(storedAdCount, 10) || 0; 
-        } 
-        loadMessagesFromLocalStorage(); 
-        botNameElement.textContent = botName; 
-        addWelcomeMessage(); 
-        refreshChat(); 
-        autoResizeTextarea(); 
-    } 
+    function initializeApp() {
+        const storedAdCount = localStorage.getItem(localStorageKeyAdCounter);
+        if (storedAdCount) {
+            successfulResponseCount = parseInt(storedAdCount, 10) || 0;
+        }
+        loadMessagesFromLocalStorage();
+        botNameElement.textContent = botName;
+        addWelcomeMessage();
+        refreshChat();
+        autoResizeTextarea();
+    }
 
-    function loadMessagesFromLocalStorage() { 
-        const storedMessages = localStorage.getItem(localStorageKeyMessages); 
-        if (storedMessages) { 
-            try { 
-                const parsedMessages = JSON.parse(storedMessages); 
-                messages = parsedMessages.map(msg => ({ 
-                    ...msg, 
-                    timestamp: new Date(msg.timestamp) 
-                })); 
-            } catch (e) { 
-                console.error("خطأ في تحليل الرسائل من التخزين المحلي:", e); 
-                messages = []; 
-                localStorage.removeItem(localStorageKeyMessages); 
-            } 
-        } 
-    } 
+    function loadMessagesFromLocalStorage() {
+        const storedMessages = localStorage.getItem(localStorageKeyMessages);
+        if (storedMessages) {
+            try {
+                const parsedMessages = JSON.parse(storedMessages);
+                messages = parsedMessages.map(msg => ({
+                    ...msg,
+                    timestamp: new Date(msg.timestamp)
+                }));
+            } catch (e) {
+                console.error("خطأ في تحليل الرسائل من التخزين المحلي:", e);
+                messages = [];
+                localStorage.removeItem(localStorageKeyMessages);
+            }
+        }
+    }
 
-    function saveMessagesToLocalStorage() { 
-        localStorage.setItem(localStorageKeyMessages, JSON.stringify(messages)); 
-    } 
+    function saveMessagesToLocalStorage() {
+        localStorage.setItem(localStorageKeyMessages, JSON.stringify(messages));
+    }
 
-    function addWelcomeMessage() { 
-      const welcomeMsg = 'مرحباً بك! أنا ' + botName + '، كيف يمكنني مساعدتك اليوم؟ 💡'; 
-      if (!messages.some(m => m.text === welcomeMsg && m.sender === "bot")) { 
-        addMessage("bot", welcomeMsg, false, true); 
-      } 
-    } 
+    function addWelcomeMessage() {
+      const welcomeMsg = 'مرحباً بك! أنا ' + botName + '، كيف يمكنني مساعدتك اليوم؟ 💡';
+      if (!messages.some(m => m.text === welcomeMsg && m.sender === "bot")) {
+        addMessage("bot", welcomeMsg, false, true); // isSystemMessage = true
+      }
+    }
 
-    function addMessage(sender, text, isImage = false, isSystemMessage = false) { 
-      const message = { sender, text, isImage, timestamp: new Date() }; 
-      messages.push(message); 
-      refreshChat(); 
-    } 
+    function addMessage(sender, text, isImage = false, isSystemMessage = false) {
+      const message = { sender, text, isImage, timestamp: new Date(), isSystemMessage }; // إضافة isSystemMessage
+      messages.push(message);
+      refreshChat();
+    }
 
     function linkifyAndFormatText(text) {
-      if (typeof text !== 'string') return ''; 
+      if (typeof text !== 'string') return '';
       const linkedText = text.replace(/(https?:\/\/[^\s!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]+)/g, '<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
-      return linkedText.replace(/\n/g, '<br>'); 
-    } 
+      return linkedText.replace(/\n/g, '<br>');
+    }
 
-    function refreshChat() { 
-      chatContainer.innerHTML = ""; 
-      messages.forEach((msg, index) => { 
-        const messageElem = document.createElement("div"); 
-        messageElem.classList.add("message", msg.sender); 
-        
-        const header = document.createElement("div"); 
-        header.classList.add("message-header"); 
-        header.innerHTML = `<span>${msg.sender === "bot" ? botName : "أنت"}</span>`; 
-        
-        const deleteBtn = document.createElement("i"); 
-        deleteBtn.className = "fas fa-trash delete-btn"; 
-        deleteBtn.title = "حذف الرسالة"; 
-        deleteBtn.onclick = () => deleteMessage(index); 
-        header.appendChild(deleteBtn); 
-        
-        messageElem.appendChild(header); 
-        
-        const bubble = document.createElement("div"); 
-        bubble.classList.add("bubble"); 
+    function refreshChat() {
+      chatContainer.innerHTML = "";
+      messages.forEach((msg, index) => {
+        const messageElem = document.createElement("div");
+        messageElem.classList.add("message", msg.sender);
 
-        if(msg.isImage) { 
-          const img = document.createElement("img"); 
-          img.src = msg.text; 
-          img.style.maxWidth = "100%"; 
-          img.style.maxHeight = "300px"; 
-          img.style.borderRadius = "var(--border-radius-sm)"; 
-          img.alt = "صورة مرسلة"; 
-          img.onload = () => { 
-              if (index === messages.length -1) { 
-                  chatContainer.scrollTop = chatContainer.scrollHeight; 
-              } 
-          } 
-          bubble.appendChild(img); 
-        } else { 
-          const originalText = msg.text; 
-          const characterLimit = 250; 
+        const header = document.createElement("div");
+        header.classList.add("message-header");
+        header.innerHTML = `<span>${msg.sender === "bot" ? botName : "أنت"}</span>`;
 
-          if (msg.sender === "bot" && originalText.length > characterLimit) { 
-            const shortText = originalText.substring(0, characterLimit) + "..."; 
-            const contentContainer = document.createElement('div'); 
-            const textSpan = document.createElement('span'); 
-            textSpan.innerHTML = linkifyAndFormatText(shortText); 
-            contentContainer.appendChild(textSpan); 
+        // عدم إضافة زر الحذف للرسالة الترحيبية
+        if (!(msg.sender === "bot" && msg.isSystemMessage)) {
+            const deleteBtn = document.createElement("i");
+            deleteBtn.className = "fas fa-trash delete-btn";
+            deleteBtn.title = "حذف الرسالة";
+            deleteBtn.onclick = () => deleteMessage(index);
+            header.appendChild(deleteBtn);
+        }
 
-            const toggleButton = document.createElement('button'); 
-            toggleButton.textContent = "المزيد من التفاصيل"; 
-            toggleButton.className = "toggle-details-btn"; 
-            toggleButton.dataset.expanded = "false"; 
+        messageElem.appendChild(header);
+
+        const bubble = document.createElement("div");
+        bubble.classList.add("bubble");
+
+        if(msg.isImage) {
+          const img = document.createElement("img");
+          img.src = msg.text;
+          img.style.maxWidth = "100%";
+          img.style.maxHeight = "300px";
+          img.style.borderRadius = "var(--border-radius-sm)";
+          img.alt = "صورة مرسلة";
+          img.onload = () => {
+              if (index === messages.length -1) {
+                  chatContainer.scrollTop = chatContainer.scrollHeight;
+              }
+          }
+          bubble.appendChild(img);
+        } else {
+          const originalText = msg.text;
+          const characterLimit = 250;
+
+          if (msg.sender === "bot" && originalText.length > characterLimit && !msg.isSystemMessage) { // لا تطبق على رسالة النظام
+            const shortText = originalText.substring(0, characterLimit) + "...";
+            const contentContainer = document.createElement('div');
+            const textSpan = document.createElement('span');
+            textSpan.innerHTML = linkifyAndFormatText(shortText);
+            contentContainer.appendChild(textSpan);
+
+            const toggleButton = document.createElement('button');
+            toggleButton.textContent = "المزيد من التفاصيل";
+            toggleButton.className = "toggle-details-btn";
+            toggleButton.dataset.expanded = "false";
 
             toggleButton.onclick = function() {
-              const isExpanded = toggleButton.dataset.expanded === "true"; 
-              if (isExpanded) { 
-                textSpan.innerHTML = linkifyAndFormatText(shortText); 
-                toggleButton.textContent = "المزيد من التفاصيل"; 
-                toggleButton.dataset.expanded = "false"; 
-              } else { 
-                textSpan.innerHTML = linkifyAndFormatText(originalText); 
-                toggleButton.textContent = "عرض أقل"; 
-                toggleButton.dataset.expanded = "true"; 
-              } 
-              if (index === messages.length - 1) { 
-                  chatContainer.scrollTop = chatContainer.scrollHeight; 
-              } 
-            }; 
-            contentContainer.appendChild(toggleButton); 
-            bubble.appendChild(contentContainer); 
-          } else { 
-            bubble.innerHTML = linkifyAndFormatText(originalText); 
-          } 
-        } 
-        messageElem.appendChild(bubble); 
-        
+              const isExpanded = toggleButton.dataset.expanded === "true";
+              if (isExpanded) {
+                textSpan.innerHTML = linkifyAndFormatText(shortText);
+                toggleButton.textContent = "المزيد من التفاصيل";
+                toggleButton.dataset.expanded = "false";
+              } else {
+                textSpan.innerHTML = linkifyAndFormatText(originalText);
+                toggleButton.textContent = "عرض أقل";
+                toggleButton.dataset.expanded = "true";
+              }
+              if (index === messages.length - 1) {
+                  chatContainer.scrollTop = chatContainer.scrollHeight;
+              }
+            };
+            contentContainer.appendChild(toggleButton);
+            bubble.appendChild(contentContainer);
+          } else {
+            bubble.innerHTML = linkifyAndFormatText(originalText);
+          }
+        }
+        messageElem.appendChild(bubble);
+
         if(msg.sender === "bot" && !msg.isImage && !msg.isSystemMessage) { // لا تظهر الأزرار للرسالة الترحيبية
-          const actionsDiv = document.createElement("div"); 
-          actionsDiv.classList.add("message-actions"); 
-          
-          const likeBtn = document.createElement("button"); 
-          likeBtn.innerHTML = '<i class="fas fa-thumbs-up"></i>'; 
-          likeBtn.title = "إعجاب"; 
-          likeBtn.addEventListener("click", (e) => e.currentTarget.classList.toggle("liked")); 
-          
-          const copyBtn = document.createElement("button"); 
-          copyBtn.innerHTML = '<i class="fas fa-copy"></i>'; 
-          copyBtn.title = "نسخ النص"; 
-          copyBtn.addEventListener("click", () => { 
-            navigator.clipboard.writeText(msg.text) 
-            .then(() => setStatus("تم نسخ المحتوى بنجاح 👍", "success", 1500)) 
-            .catch(err => setStatus("فشل النسخ: " + err.message, "error", 2000)); 
-          }); 
-          
-          actionsDiv.appendChild(likeBtn); 
-          actionsDiv.appendChild(copyBtn); 
-          messageElem.appendChild(actionsDiv); 
-        } 
-        
-        chatContainer.appendChild(messageElem); 
-      }); 
+          const actionsDiv = document.createElement("div");
+          actionsDiv.classList.add("message-actions");
 
-      saveMessagesToLocalStorage(); 
+          const likeBtn = document.createElement("button");
+          likeBtn.innerHTML = '<i class="fas fa-thumbs-up"></i>';
+          likeBtn.title = "إعجاب";
+          likeBtn.addEventListener("click", (e) => e.currentTarget.classList.toggle("liked"));
 
-      const images = chatContainer.querySelectorAll('img'); 
-      let allImagesLoaded = true; 
-      images.forEach(img => { if (!img.complete) allImagesLoaded = false; }); 
-      if (allImagesLoaded) chatContainer.scrollTop = chatContainer.scrollHeight; 
-      
-      autoResizeTextarea(); 
-    } 
+          const copyBtn = document.createElement("button");
+          copyBtn.innerHTML = '<i class="fas fa-copy"></i>';
+          copyBtn.title = "نسخ النص";
+          copyBtn.addEventListener("click", () => {
+            navigator.clipboard.writeText(msg.text)
+            .then(() => setStatus("تم نسخ المحتوى بنجاح 👍", "success", 1500))
+            .catch(err => setStatus("فشل النسخ: " + err.message, "error", 2000));
+          });
 
-    function deleteMessage(index) { 
+          actionsDiv.appendChild(likeBtn);
+          actionsDiv.appendChild(copyBtn);
+          messageElem.appendChild(actionsDiv);
+        }
+
+        chatContainer.appendChild(messageElem);
+      });
+
+      saveMessagesToLocalStorage();
+
+      const images = chatContainer.querySelectorAll('img');
+      let allImagesLoaded = true;
+      images.forEach(img => { if (!img.complete) allImagesLoaded = false; });
+      if (allImagesLoaded) chatContainer.scrollTop = chatContainer.scrollHeight;
+
+      autoResizeTextarea();
+    }
+
+    function deleteMessage(index) {
       messages.splice(index, 1);
-      refreshChat(); 
-      setStatus("تم حذف الرسالة.", "success", 1500); 
-    } 
+      refreshChat();
+      setStatus("تم حذف الرسالة.", "success", 1500);
+    }
 
-    function deleteAllMessages() { 
-      if (messages.length === 0 || (messages.length === 1 && messages[0].text.includes('مرحباً بك!'))) { 
-        setStatus("لا يوجد رسائل لحذفها.", "", 1500); 
-        return; 
-      } 
-      if (confirm("هل أنت متأكد من أنك تريد حذف جميع الرسائل؟ هذا الإجراء لا يمكن التراجع عنه.")) { 
-        messages = []; 
-        refreshChat(); 
-        setStatus("تم حذف جميع الرسائل بنجاح.", "success", 2000); 
-        addWelcomeMessage(); // إعادة إضافة الرسالة الترحيبية بعد الحذف
-      } 
-    } 
-    
-    function setStatus(message, type = "", duration = 3000) { 
-      clearTimeout(statusTimeout); 
-      statusBar.textContent = message; 
-      statusBar.className = "status " + type; 
-      if (message && duration !== null) { 
-        statusTimeout = setTimeout(() => { 
-          statusBar.textContent = ""; 
-          statusBar.className = "status"; 
-        }, duration); 
-      } else if (!message) { 
-         statusBar.textContent = ""; 
-         statusBar.className = "status"; 
-      } 
-    } 
+    function deleteAllMessages() {
+      const actualMessages = messages.filter(msg => !(msg.sender === "bot" && msg.isSystemMessage));
+      if (actualMessages.length === 0) {
+        setStatus("لا يوجد رسائل لحذفها.", "", 1500);
+        return;
+      }
+      if (confirm("هل أنت متأكد من أنك تريد حذف جميع الرسائل؟ هذا الإجراء لا يمكن التراجع عنه.")) {
+        // إبقاء الرسالة الترحيبية
+        messages = messages.filter(msg => msg.sender === "bot" && msg.isSystemMessage);
+        refreshChat();
+        setStatus("تم حذف جميع الرسائل بنجاح.", "success", 2000);
+        if (!messages.some(m => m.sender === "bot" && m.isSystemMessage)) { // إذا حذفت بالخطأ
+            addWelcomeMessage();
+        }
+      }
+    }
 
-    function handleImageUpload(event) { 
-      if (event.target.type === 'file' && event.target.files && event.target.files[0]) { 
-        const file = event.target.files[0]; 
+    function setStatus(message, type = "", duration = 3000) {
+      clearTimeout(statusTimeout);
+      statusBar.textContent = message;
+      statusBar.className = "status " + type;
+      if (message && duration !== null) {
+        statusTimeout = setTimeout(() => {
+          statusBar.textContent = "";
+          statusBar.className = "status";
+        }, duration);
+      } else if (!message) {
+         statusBar.textContent = "";
+         statusBar.className = "status";
+      }
+    }
+
+    function handleImageUpload(event) {
+      if (event.target.type === 'file' && event.target.files && event.target.files[0]) {
+        const file = event.target.files[0];
         if (file.size > 5 * 1024 * 1024) { // 5MB
-          setStatus("حجم الصورة كبير جدًا (الحد الأقصى 5 ميجابايت).", "error", 3000); 
-          event.target.value = ""; 
-          return; 
-        } 
-        const reader = new FileReader(); 
-        reader.onload = (e) => { 
-          addMessage("user", e.target.result, true); 
-          setStatus("تم عرض الصورة محلياً. تحليل الصور قيد التطوير.", "", 2500); 
+          setStatus("حجم الصورة كبير جدًا (الحد الأقصى 5 ميجابايت).", "error", 3000);
+          event.target.value = "";
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          addMessage("user", e.target.result, true);
+          setStatus("تم عرض الصورة محلياً. تحليل الصور قيد التطوير.", "", 2500);
           // يمكنك هنا إضافة منطق لإرسال الصورة للـ API إذا كان يدعم ذلك
-        } 
-        reader.readAsDataURL(file); 
+        }
+        reader.readAsDataURL(file);
         event.target.value = ""; // لإتاحة رفع نفس الصورة مرة أخرى
-      } 
-    } 
-    
-    // --- التعديل هنا ---
-    function generateChatPrompt(userMessage) { 
-      const maxHistoryMessages = 8; 
-      let relevantHistory = ""; 
-      const textMessages = messages.filter(m => !m.isImage); 
-      
-      const systemPrompt = `أنت ${botName}، مساعد ذكاء اصطناعي ودود، صادق، إيجابي، وذكي جداً. هدفك هو مساعدة المستخدم والإجابة على أسئلته بوضوح وبطريقة تفاعلية ومفصلة. تجنب الردود المقتضبة جداً وحاول أن تكون محادثتك جذابة. إذا لم تعرف الإجابة، قل ذلك بصراحة وقدم المساعدة إن أمكن. استخدم بعض الرموز التعبيرية بشكل مناسب ولكن بلمسة بسيطة. إذا سألك المستخدم "من صنعك" أو "مين عملك" أو "من هو مطورك" أو أي سؤال مشابه، يجب أن تكون إجابتك دائماً "أنا من صنع سيف هاني".\n\n`; 
+      }
+    }
+
+    function generateChatPrompt(userMessage) {
+      const maxHistoryMessages = 8;
+      let relevantHistory = "";
+      const textMessages = messages.filter(m => !m.isImage && !m.isSystemMessage); // استبعاد رسائل النظام من السجل
+
+      const systemPrompt = `أنت ${botName}، مساعد ذكاء اصطناعي ودود، صادق، إيجابي، وذكي جداً. هدفك هو مساعدة المستخدم والإجابة على أسئلته بوضوح وبطريقة تفاعلية ومفصلة. تجنب الردود المقتضبة جداً وحاول أن تكون محادثتك جذابة. إذا لم تعرف الإجابة، قل ذلك بصراحة وقدم المساعدة إن أمكن. استخدم بعض الرموز التعبيرية بشكل مناسب ولكن بلمسة بسيطة. إذا سألك المستخدم "من صنعك" أو "مين عملك" أو "من هو مطورك" أو أي سؤال مشابه، يجب أن تكون إجابتك دائماً "أنا من صنع سيف هاني".\n\n`;
 
       const startIndex = Math.max(0, textMessages.length - maxHistoryMessages);
-      for (let i = startIndex; i < textMessages.length; i++) { 
-        const msg = textMessages[i]; 
-        // تجنب إضافة الرسالة الترحيبية الأولية إلى السجل إذا كانت هي الرسالة الوحيدة من البوت
-        if (msg.sender === "bot" && msg.text.includes('مرحباً بك! أنا ' + botName) && textMessages.filter(m => m.sender === 'bot').length === 1 && messages.length <= maxHistoryMessages +1) { 
-            continue; 
-        } 
-        relevantHistory += (msg.sender === "user" ? "المستخدم: " : botName + ": ") + msg.text + "\n"; 
-      } 
-      
-      return `${systemPrompt}${relevantHistory}المستخدم: ${userMessage}\n${botName}:`; 
-    } 
+      for (let i = startIndex; i < textMessages.length; i++) {
+        const msg = textMessages[i];
+        relevantHistory += (msg.sender === "user" ? "المستخدم: " : botName + ": ") + msg.text + "\n";
+      }
 
-    async function fetchResponse(prompt) { 
+      return `${systemPrompt}${relevantHistory}المستخدم: ${userMessage}\n${botName}:`;
+    }
+
+    async function fetchResponse(prompt) {
       setStatus(`${botName} يُفكر...`, "", null); // null duration to keep it until next status
-      const requestBody = { 
-        contents: [{ parts: [{ text: prompt }] }], 
-      }; 
-
-      try { 
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, { 
-          method: 'POST', 
-          headers: {'Content-Type': 'application/json'}, 
-          body: JSON.stringify(requestBody) 
-        }); 
-
-        if(!response.ok) { 
-          const errorData = await response.json(); 
-          console.error("استجابة خطأ واجهة برمجة التطبيقات:", errorData); 
-          let errorMessage = ` خطأ ${response.status}: ${response.statusText}.`; 
-          if (errorData.error && errorData.error.message) { 
-             if (errorData.error.message.toLowerCase().includes("api key") || errorData.error.message.toLowerCase().includes("permission")) { 
-                errorMessage += " خطأ في إعدادات الطلب أو صلاحيات المفتاح."; 
-             } else { 
-                errorMessage += ` التفاصيل: ${errorData.error.message.substring(0, 200)}`; 
-             } 
-          } 
-          throw new Error(errorMessage); 
-        } 
-        const data = await response.json(); 
-        
-        if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) { 
-          return data.candidates[0].content.parts[0].text; 
-        } else if (data.promptFeedback?.blockReason) { 
-            console.warn("تم حظر المطالبة بواسطة واجهة برمجة التطبيقات:", data.promptFeedback.blockReason, data.promptFeedback.safetyRatings); 
-            return `لم أتمكن من معالجة طلبك بسبب قيود المحتوى (السبب: ${data.promptFeedback.blockReason}). حاول تغيير سؤالك.`; 
-        } else if (data.candidates && data.candidates[0]?.finishReason) { 
-            let botMessage = (data.candidates[0].content?.parts?.[0]?.text || ""); 
-            const reason = data.candidates[0].finishReason; 
-            if (reason === "SAFETY") {
-                return botMessage + (botMessage ? "\n\n" : "") + "لم أتمكن من إكمال الرد بسبب قيود السلامة. حاول تعديل سؤالك أو الموضوع."; 
-            } else if (reason === "MAX_TOKENS") { 
-                return botMessage + "\n\n(تم اختصار الرد لأنه تجاوز الحد الأقصى للطول)"; 
-            } else { 
-                 console.warn("استجابة واجهة برمجة التطبيقات مع finishReason ولكن بدون محتوى كافٍ:", reason, data); 
-                 return botMessage + (botMessage ? "\n\n" : "") + `لم يتم استلام رد مكتمل (السبب: ${reason}).`; 
-            } 
-        } else { 
-          console.warn("تنسيق استجابة واجهة برمجة التطبيقات غير متوقع:", data); 
-          return "لم يتم استلام رد صحيح من الخادم. قد يكون الرد غير كامل أو هناك مشكلة."; 
-        } 
-      } catch (error) { 
-          console.error("خطأ في الجلب:", error); 
-          // لا تعرض مفتاح API للمستخدم
-          if (error.message && (error.message.toLowerCase().includes("api key") || error.message.toLowerCase().includes(apiKey.toLowerCase()))) { 
-              throw new Error("حدث خطأ أثناء الاتصال بالخادم. يرجى مراجعة وحدة التحكم للمزيد من التفاصيل."); 
-          } 
-          throw error; 
-      } 
-    } 
-
-    async function sendMessage() { 
-      const messageText = userInput.value.trim(); 
-      if (!messageText) return; 
-
-      addMessage("user", messageText); 
-      userInput.value = ""; 
-      autoResizeTextarea(); 
-      searchLog.textContent = `رسالتك الأخيرة: ${messageText.substring(0, 60)}${messageText.length > 60 ? '...' : ''}`; 
-      
-      try { 
-        const prompt = generateChatPrompt(messageText); 
-        const responseText = await fetchResponse(prompt); 
-        addMessage("bot", responseText); 
-        setStatus("تم استلام الرد بنجاح! ✅", "success"); 
-
-        // --- التعديل هنا ---
-        // زيادة العداد فقط بعد استجابة ناجحة
-        successfulResponseCount++; 
-        localStorage.setItem(localStorageKeyAdCounter, successfulResponseCount.toString()); 
-
-        // التحقق من عرض الإعلان
-        if (successfulResponseCount % 3 === 0) { 
-            setTimeout(() => { 
-                // استبدل هذا برابط الإعلان الخاص بك
-                const adUrl = "https://www.profitableratecpm.com/k8fisnjjc?key=afa7ea920578f74cea5997d670bbe78e"; 
-                window.open(adUrl, '_blank'); 
-                console.log("تم فتح رابط الإعلان. عدد الردود الناجحة:", successfulResponseCount);
-            }, 5000); // 5000 ميللي ثانية = 5 ثواني 
-        } 
-        
-      } catch (error) { 
-        console.error("تفاصيل خطأ إرسال الرسالة:", error); 
-        let displayError = "عفوًا، واجهت مشكلة أثناء محاولة البحث. 😥"; 
-        // لا تعرض رسائل خطأ تحتوي على مفتاح API للمستخدم
-        if (error.message && !error.message.toLowerCase().includes("api key") && !error.message.toLowerCase().includes("api_key") && !error.message.toLowerCase().includes(apiKey.toLowerCase())) { 
-            displayError += " التفاصيل: " + error.message; 
+      const requestBody = {
+        contents: [{ parts: [{ text: prompt }] }],
+         generationConfig: { // إضافة إعدادات التوليد
+            // temperature: 0.7, // للتحكم في إبداعية الرد (0.0 - 1.0)
+            // topK: 40,
+            // topP: 0.95,
+            maxOutputTokens: 1024, // تحديد حد أقصى للتوكنز في الرد
         }
-        addMessage("bot", displayError); 
-        setStatus("فشل في الحصول على الرد. ❌", "error"); 
-      } 
-    } 
+      };
 
-    userInput.addEventListener("keydown", function(event) { 
-      if(event.key === "Enter" && !event.shiftKey) { 
-        event.preventDefault(); 
-        sendMessage(); 
-      } 
-    }); 
-    userInput.addEventListener("input", autoResizeTextarea); 
-    
-    function autoResizeTextarea() { 
-        userInput.style.height = 'auto'; 
-        let newHeight = userInput.scrollHeight; 
-        const maxHeight = parseInt(getComputedStyle(userInput).maxHeight) || 110; 
-        
-        if (newHeight > maxHeight) { 
-            newHeight = maxHeight; 
-            userInput.style.overflowY = 'auto'; 
-        } else { 
-            userInput.style.overflowY = 'hidden'; 
-        } 
-        userInput.style.height = newHeight + 'px'; 
-    } 
-    
-    initializeApp(); 
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(requestBody)
+        });
+
+        if(!response.ok) {
+          const errorData = await response.json();
+          console.error("استجابة خطأ واجهة برمجة التطبيقات:", errorData);
+          let errorMessage = ` خطأ ${response.status}: ${response.statusText}.`;
+          if (errorData.error && errorData.error.message) {
+             if (errorData.error.message.toLowerCase().includes("api key") || errorData.error.message.toLowerCase().includes("permission")) {
+                errorMessage += " خطأ في إعدادات الطلب أو صلاحيات المفتاح.";
+             } else {
+                errorMessage += ` التفاصيل: ${errorData.error.message.substring(0, 200)}`;
+             }
+          }
+          throw new Error(errorMessage);
+        }
+        const data = await response.json();
+
+        if (data.candidates && data.candidates[0]?.content?.parts?.[0]?.text) {
+          return data.candidates[0].content.parts[0].text;
+        } else if (data.promptFeedback?.blockReason) {
+            console.warn("تم حظر المطالبة بواسطة واجهة برمجة التطبيقات:", data.promptFeedback.blockReason, data.promptFeedback.safetyRatings);
+            let reasonText = data.promptFeedback.blockReason;
+            if (data.promptFeedback.safetyRatings && data.promptFeedback.safetyRatings.length > 0) {
+                const specificReasons = data.promptFeedback.safetyRatings
+                    .filter(r => r.probability !== "NEGLIGIBLE" && r.probability !== "LOW") // عرض الأسباب الهامة فقط
+                    .map(r => `${r.category.replace('HARM_CATEGORY_', '')} (${r.probability})`)
+                    .join(', ');
+                if (specificReasons) reasonText += `: ${specificReasons}`;
+            }
+            return `لم أتمكن من معالجة طلبك بسبب قيود المحتوى (السبب: ${reasonText}). حاول تغيير سؤالك.`;
+        } else if (data.candidates && data.candidates[0]?.finishReason) {
+            let botMessage = (data.candidates[0].content?.parts?.[0]?.text || "");
+            const reason = data.candidates[0].finishReason;
+            if (reason === "SAFETY") {
+                 let safetyReasonDetails = "قيود السلامة العامة";
+                 if(data.candidates[0].safetyRatings && data.candidates[0].safetyRatings.length > 0) {
+                    const specificReasons = data.candidates[0].safetyRatings
+                        .filter(r => r.probability !== "NEGLIGIBLE" && r.probability !== "LOW")
+                        .map(r => `${r.category.replace('HARM_CATEGORY_', '')} (${r.probability})`)
+                        .join(', ');
+                    if (specificReasons) safetyReasonDetails = specificReasons;
+                 }
+                return botMessage + (botMessage ? "\n\n" : "") + `لم أتمكن من إكمال الرد بسبب قيود السلامة (${safetyReasonDetails}). حاول تعديل سؤالك أو الموضوع.`;
+            } else if (reason === "MAX_TOKENS") {
+                return botMessage + (botMessage ? "\n\n" : "") + "(تم اختصار الرد لأنه تجاوز الحد الأقصى للطول المسموح به)";
+            } else if (reason === "RECITATION") {
+                return botMessage + (botMessage ? "\n\n" : "") + "تم إيقاف الرد بسبب الاقتباس المفرط من مصادر محمية. يرجى إعادة صياغة طلبك.";
+            }
+             else {
+                 console.warn("استجابة واجهة برمجة التطبيقات مع finishReason ولكن بدون محتوى كافٍ:", reason, data);
+                 return botMessage + (botMessage ? "\n\n" : "") + `لم يتم استلام رد مكتمل (السبب: ${reason}).`;
+            }
+        } else {
+          console.warn("تنسيق استجابة واجهة برمجة التطبيقات غير متوقع:", data);
+          return "لم يتم استلام رد صحيح من الخادم. قد يكون الرد غير كامل أو هناك مشكلة.";
+        }
+      } catch (error) {
+          console.error("خطأ في الجلب:", error);
+          if (error.message && (error.message.toLowerCase().includes("api key") || error.message.toLowerCase().includes(apiKey.toLowerCase()))) {
+              throw new Error("حدث خطأ أثناء الاتصال بالخادم. يرجى مراجعة وحدة التحكم للمزيد من التفاصيل.");
+          }
+          throw error;
+      }
+    }
+
+    async function sendMessage() {
+      const messageText = userInput.value.trim();
+      if (!messageText) return;
+
+      addMessage("user", messageText);
+      userInput.value = "";
+      autoResizeTextarea();
+      searchLog.textContent = `رسالتك الأخيرة: ${messageText.substring(0, 60)}${messageText.length > 60 ? '...' : ''}`;
+
+      try {
+        const prompt = generateChatPrompt(messageText);
+        const responseText = await fetchResponse(prompt);
+        addMessage("bot", responseText);
+        setStatus("تم استلام الرد بنجاح! ✅", "success");
+
+        successfulResponseCount++;
+        localStorage.setItem(localStorageKeyAdCounter, successfulResponseCount.toString());
+
+        if (successfulResponseCount % 3 === 0) {
+            setTimeout(() => {
+                const adUrl = "https://www.profitableratecpm.com/k8fisnjjc?key=afa7ea920578f74cea5997d670bbe78e";
+                window.open(adUrl, '_blank');
+                console.log("تم فتح رابط الإعلان. عدد الردود الناجحة:", successfulResponseCount);
+            }, 5000); // 5 seconds
+        }
+
+      } catch (error) {
+        console.error("تفاصيل خطأ إرسال الرسالة:", error);
+        let displayError = "عفوًا، واجهت مشكلة أثناء محاولة البحث. 😥";
+        if (error.message && !error.message.toLowerCase().includes("api key") && !error.message.toLowerCase().includes("api_key") && !error.message.toLowerCase().includes(apiKey.toLowerCase())) {
+            displayError += " التفاصيل: " + error.message;
+        }
+        addMessage("bot", displayError);
+        setStatus("فشل في الحصول على الرد. ❌", "error");
+      }
+    }
+
+    userInput.addEventListener("keydown", function(event) {
+      if(event.key === "Enter" && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    });
+    userInput.addEventListener("input", autoResizeTextarea);
+
+    function autoResizeTextarea() {
+        userInput.style.height = 'auto'; // Reset height to recalculate
+        let newHeight = userInput.scrollHeight;
+        const maxHeight = parseInt(window.getComputedStyle(userInput).maxHeight) || 110; // Use window.getComputedStyle
+
+        if (newHeight > maxHeight) {
+            newHeight = maxHeight;
+            userInput.style.overflowY = 'auto';
+        } else {
+            userInput.style.overflowY = 'hidden';
+        }
+        userInput.style.height = newHeight + 'px';
+    }
+
+    initializeApp();
   </script>
-</body> 
+</body>
 </html>
