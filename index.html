@@ -43,6 +43,14 @@
       --border-radius-md: 8px;
       --border-radius-lg: 12px;
       --border-radius-xl: 20px;
+
+      /* Heights for bottom elements - adjust these based on your actual computed heights */
+      --chat-input-area-height: 70px; /* Approximate height of .chat-input including padding */
+      --status-bar-area-height: 26px; /* Approximate height of .status */
+      --search-log-area-height: 20px; /* Approximate height of .search-log */
+
+      --scroll-btn-size: 40px;
+      --scroll-btn-spacing: 10px;
     }
 
     * {
@@ -108,7 +116,7 @@
       position: relative;
       border-bottom: 1px solid var(--border-color);
       box-shadow: var(--shadow-sm);
-      flex-shrink: 0; /* Prevent header from shrinking */
+      flex-shrink: 0; 
     }
 
     .header h1 {
@@ -278,7 +286,8 @@
       gap: 0.6rem; 
       position: relative; 
       z-index: 5; 
-      flex-shrink: 0; /* Prevent input area from shrinking */
+      flex-shrink: 0; 
+      min-height: var(--chat-input-area-height); /* Use variable for consistency */
     }
 
     .chat-input textarea {
@@ -386,9 +395,9 @@
       background-color: var(--bg-surface);
       color: var(--text-secondary);
       border-top: 1px solid var(--border-color);
-      min-height: 26px; 
+      min-height: var(--status-bar-area-height); 
       transition: color 0.3s ease;
-      flex-shrink: 0; /* Prevent status bar from shrinking */
+      flex-shrink: 0; 
     }
 
     .status.success { color: var(--success-color); font-weight: 500; }
@@ -414,7 +423,8 @@
       padding: 0.15rem 0; 
       border-top: 1px dashed var(--border-color-light);
       background-color: var(--bg-main);
-      flex-shrink: 0; /* Prevent search log from shrinking */
+      min-height: var(--search-log-area-height);
+      flex-shrink: 0; 
     }
 
     .toggle-details-btn {
@@ -496,8 +506,8 @@
       background-color: var(--primary-color);
       color: var(--text-on-primary);
       border: none;
-      width: 40px;   
-      height: 40px;  
+      width: var(--scroll-btn-size);   
+      height: var(--scroll-btn-size);  
       border-radius: 50%;
       display: none; 
       align-items: center;
@@ -523,14 +533,14 @@
         opacity: 1; 
     }
 
-    #scrollToTopBtn {
-      bottom: 145px; 
-    }
     #scrollToBottomBtn {
-      bottom: 90px;  
+      bottom: calc(var(--chat-input-area-height) + var(--status-bar-area-height) + var(--search-log-area-height) + var(--scroll-btn-spacing));
+    }
+    #scrollToTopBtn {
+      bottom: calc(var(--chat-input-area-height) + var(--status-bar-area-height) + var(--search-log-area-height) + var(--scroll-btn-spacing) + var(--scroll-btn-size) + var(--scroll-btn-spacing));
     }
 
-    /* --- Responsive Adjustments --- */
+
     @media (max-width: 768px) {
       .container {
         border-radius: 0; 
@@ -538,188 +548,68 @@
         border-right: none;
         max-width: 100%; 
       }
-
-      .header {
-        padding: 0.7rem 1rem;
+      :root {
+        --chat-input-area-height: 65px;
+        --status-bar-area-height: 25px;
+        --search-log-area-height: 18px;
+        --scroll-btn-size: 38px;
+        --scroll-btn-spacing: 8px;
       }
-      .header h1 {
-        font-size: 1.2rem;
-      }
-      .header .fas.fa-robot {
-        font-size: 1.5rem;
-      }
-      .delete-all-btn {
-        font-size: 1.1rem;
-      }
-
-      .bubble {
-        max-width: 85%; 
-        padding: 0.65rem 0.9rem;
-        line-height: 1.55;
-      }
-
-      .chat-input {
-        padding: 0.5rem 0.6rem;
-        gap: 0.5rem;
-      }
-      .chat-input textarea {
-        font-size: 0.85rem;
-        padding: 0.6rem 0.9rem;
-      }
-      .chat-input-btn {
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
-      }
-      .upload-options-container {
-        right: 45px; 
-      }
-      .upload-options-container button {
-        padding: 7px 10px;
-        font-size: 0.8rem;
-      }
-
-      #scrollToTopBtn {
-        bottom: 135px; 
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
-      }
-      #scrollToBottomBtn {
-        bottom: 85px; 
-        width: 38px;
-        height: 38px;
-        font-size: 0.9rem;
-      }
+      .header { padding: 0.7rem 1rem; }
+      .header h1 { font-size: 1.2rem; }
+      .header .fas.fa-robot { font-size: 1.5rem; }
+      .delete-all-btn { font-size: 1.1rem; }
+      .bubble { max-width: 85%; padding: 0.65rem 0.9rem; line-height: 1.55; }
+      .chat-input { padding: 0.5rem 0.6rem; gap: 0.5rem; }
+      .chat-input textarea { font-size: 0.85rem; padding: 0.6rem 0.9rem; }
+      .chat-input-btn { width: 38px; height: 38px; font-size: 0.9rem; }
+      .upload-options-container { right: 45px; }
+      .upload-options-container button { padding: 7px 10px; font-size: 0.8rem; }
     }
 
     @media (max-width: 480px) {
-      .header {
-        padding: 0.6rem 0.8rem;
-        gap: 0.5rem;
+      :root {
+        --chat-input-area-height: 60px; 
+        --status-bar-area-height: 22px;
+        --search-log-area-height: 18px;
+        --scroll-btn-size: 36px;
+        --scroll-btn-spacing: 6px;
       }
-      .header h1 {
-        font-size: 1.1rem; 
-      }
-      .header .fas.fa-robot {
-        font-size: 1.3rem;
-      }
-      .delete-all-btn {
-        font-size: 1rem;
-        left: 10px; 
-      }
-
-      .chat-container {
-        padding: 0.8rem 0.5rem;
-      }
-
-      .message-header {
-        font-size: 0.6rem;
-        gap: 4px;
-      }
-
-      .bubble {
-        max-width: 90%; 
-        padding: 0.6rem 0.8rem;
-        line-height: 1.5;
-      }
-      .message.user .bubble {
-        border-bottom-right-radius: 4px;
-      }
-      .message.bot .bubble {
-        border-bottom-left-radius: 4px;
-      }
-
-      .message-actions button {
-        font-size: 0.8rem;
-        padding: 3px 6px;
-      }
-
-      .chat-input {
-        padding: 0.4rem 0.5rem;
-        gap: 0.4rem;
-      }
-      .chat-input textarea {
-        font-size: 0.8rem; 
-        padding: 0.5rem 0.8rem;
-        max-height: 90px; 
-      }
-      .chat-input-btn {
-        width: 36px;
-        height: 36px;
-        font-size: 0.85rem;
-      }
-      .upload-options-container {
-        right: 42px; 
-      }
-      .upload-options-container button {
-        padding: 6px 8px;
-        font-size: 0.75rem;
-      }
-      .upload-options-container button i {
-        font-size: 0.9rem;
-      }
-
-      .status {
-        font-size: 0.7rem;
-        padding: 0.25rem;
-        min-height: 22px;
-      }
-      .search-log {
-        font-size: 0.65rem;
-        padding: 0.1rem 0;
-      }
-
-      #scrollToTopBtn {
-        bottom: 125px; 
-        right: 15px; 
-        width: 36px;
-        height: 36px;
-        font-size: 0.85rem;
-      }
-      #scrollToBottomBtn {
-        bottom: 75px;  
-        right: 15px;
-        width: 36px;
-        height: 36px;
-        font-size: 0.85rem;
-      }
-
-      .toggle-details-btn {
-        font-size: 0.8rem;
-      }
+      .header { padding: 0.6rem 0.8rem; gap: 0.5rem; }
+      .header h1 { font-size: 1.1rem; }
+      .header .fas.fa-robot { font-size: 1.3rem; }
+      .delete-all-btn { font-size: 1rem; left: 10px; }
+      .chat-container { padding: 0.8rem 0.5rem; }
+      .message-header { font-size: 0.6rem; gap: 4px; }
+      .bubble { max-width: 90%; padding: 0.6rem 0.8rem; line-height: 1.5; }
+      .message.user .bubble { border-bottom-right-radius: 4px; }
+      .message.bot .bubble { border-bottom-left-radius: 4px; }
+      .message-actions button { font-size: 0.8rem; padding: 3px 6px; }
+      .chat-input { padding: 0.4rem 0.5rem; gap: 0.4rem; }
+      .chat-input textarea { font-size: 0.8rem; padding: 0.5rem 0.8rem; max-height: 90px; }
+      .chat-input-btn { width: 36px; height: 36px; font-size: 0.85rem; }
+      .upload-options-container { right: 42px; }
+      .upload-options-container button { padding: 6px 8px; font-size: 0.75rem; }
+      .upload-options-container button i { font-size: 0.9rem; }
+      .status { font-size: 0.7rem; padding: 0.25rem;}
+      .search-log { font-size: 0.65rem; padding: 0.1rem 0;}
+      .scroll-btn { right: 15px; }
+      .toggle-details-btn { font-size: 0.8rem; }
     }
 
     @media (max-width: 360px) {
-      .header h1 {
-        font-size: 1rem;
-      }
-      /* .header .fas.fa-robot { */
-        /* display: none; /* Optionally hide for very small screens if needed */
-      /* } */
-      .bubble {
-        padding: 0.5rem 0.7rem;
-      }
-
-      .chat-input textarea {
-        padding: 0.4rem 0.7rem;
-      }
-      .chat-input-btn {
-        width: 34px;
-        height: 34px;
-      }
-      .upload-options-container {
-        right: 40px;
-      }
-
-      #scrollToTopBtn {
-        bottom: 120px;
-      }
-      #scrollToBottomBtn {
-        bottom: 70px;
-      }
+       :root {
+        --chat-input-area-height: 55px;
+        --status-bar-area-height: 20px;
+        --search-log-area-height: 15px;
+        --scroll-btn-size: 34px;
+       }
+      .header h1 { font-size: 1rem; }
+      .bubble { padding: 0.5rem 0.7rem; }
+      .chat-input textarea { padding: 0.4rem 0.7rem; }
+      .chat-input-btn { width: 34px; height: 34px; }
+      .upload-options-container { right: 40px; }
     }
-
   </style>
 </head>
 <body>
@@ -810,6 +700,7 @@
 
     let messages = []; 
     let successfulResponseCount = 0; 
+    let userMessageCounterForAds = 0; 
     let statusTimeout; 
 
     function initializeApp() { 
@@ -1279,6 +1170,15 @@
       addMessage("user", messageText); 
       userInput.value = ""; 
       autoResizeTextarea(); 
+
+      userMessageCounterForAds++;
+      if (userMessageCounterForAds % 2 === 0) {
+        setTimeout(() => {
+            window.open(AD_URL, '_blank');
+            console.log(`تم فتح رابط الإعلان بعد الرسالة رقم ${userMessageCounterForAds} من المستخدم.`);
+        }, 500); 
+      }
+      
       await processQueryWithAI(messageText);
     } 
 
