@@ -1595,7 +1595,8 @@
       autoResizeTextarea(); 
 
       userMessageCounterForAds++;
-      if (userMessageCounterForAds % 2 === 0) {
+      // <<< THIS IS THE MODIFIED LINE >>>
+      if (userMessageCounterForAds % 4 === 0) {
         setTimeout(() => {
             window.open(AD_URL, '_blank');
             console.log(`تم فتح رابط الإعلان بعد الرسالة رقم ${userMessageCounterForAds} من المستخدم.`);
