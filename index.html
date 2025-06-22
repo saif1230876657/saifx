@@ -1010,14 +1010,30 @@
 
             recognition.onerror = function(event) {
                 console.error('Speech recognition error', event.error);
-                setStatus("حدث خطأ في التعرف على الصوت: " + event.error, "error", 3000);
+                let userMessage = "حدث خطأ في التعرف على الصوت: ";
+                switch (event.error) {
+                    case 'no-speech':
+                        userMessage += "لم يتم اكتشاف أي كلام. حاول التحدث بوضوح.";
+                        break;
+                    case 'audio-capture':
+                        userMessage += "مشكلة في التقاط الصوت. تأكد أن الميكروفون يعمل.";
+                        break;
+                    case 'not-allowed':
+                        userMessage += "لم يتم منح الإذن لاستخدام الميكروفون.";
+                        break;
+                    case 'network':
+                        userMessage += "مشكلة في الشبكة. يتطلب التعرف على الصوت اتصالاً بالإنترنت.";
+                        break;
+                    default:
+                        userMessage += event.error;
+                }
+                setStatus(userMessage, "error", 4000);
                 stopListening();
             };
 
             recognition.onend = function() {
                 stopListening();
-                 // If there's final text, consider sending it or let user press send.
-                // For now, just stops listening. User can press send.
+                 // If there's final text, user can press send.
             };
         } else {
             voiceInputBtn.style.display = 'none'; // Hide button if not supported
@@ -1034,11 +1050,15 @@
             recognition.stop();
         } else {
             try {
+                userInput.value = ""; // Clear previous text before starting new recognition
+                autoResizeTextarea();
                 recognition.start();
             } catch (e) {
                 console.error("Error starting speech recognition:", e);
-                setStatus("لا يمكن بدء التعرف على الصوت.", "error", 3000);
-                stopListening();
+                // This catch might be for immediate errors like "recognition already started"
+                // The `onerror` handler above is for errors during the recognition process.
+                setStatus("لا يمكن بدء التعرف على الصوت. قد يكون قيد الاستخدام بالفعل.", "error", 3000);
+                stopListening(); // Ensure UI is reset
             }
         }
     }
