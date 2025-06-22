@@ -93,21 +93,21 @@
       align-items: center;
       color: var(--text-primary);
       overflow: hidden; 
-      padding-top: 10px;    /*  <<<---- الهامش العلوي للجسم */
-      padding-bottom: 10px; /*  <<<---- الهامش السفلي للجسم */
-      /* لا يوجد padding-left أو padding-right هنا */
+      padding-top: 10px;    /*  الهامش العلوي للجسم (لإعطاء مسافة حول الحاوية الرئيسية على الشاشات الكبيرة) */
+      padding-bottom: 10px; /*  الهامش السفلي للجسم (لإعطاء مسافة حول الحاوية الرئيسية على الشاشات الكبيرة) */
+      /* لا يوجد padding-left أو padding-right هنا بشكل افتراضي، الحاوية تتمركز بنفسها */
     }
 
     .container {
       width: 100%;
-      max-width: 760px; 
-      height: 100%; 
+      max-width: 760px; /* يحدد أقصى عرض للحاوية على الشاشات الكبيرة (مثل اللابتوب) */
+      height: 100%; /* تجعل الحاوية تملأ ارتفاع المنطقة المتاحة داخل body */
       background: var(--bg-surface); 
       border: 1px solid var(--border-color);
       border-radius: var(--border-radius-lg);
       display: flex;
       flex-direction: column; 
-      overflow: hidden; 
+      overflow: hidden; /* يمنع محتويات الحاوية من تجاوز حدودها */
       position: relative; 
       box-shadow: var(--shadow-lg);
     }
@@ -115,11 +115,11 @@
     .header {
       background: var(--bg-surface);
       color: var(--text-primary);
-      padding: 0.6rem 1rem; /* تقليل الـ padding لتصغير ارتفاع الهيدر */
+      padding: 0.6rem 1rem; 
       text-align: center;
       display: flex;
       align-items: center;
-      gap: 0.6rem; /* تقليل المسافة بين العناصر قليلاً */
+      gap: 0.6rem; 
       position: relative; 
       border-bottom: 1px solid var(--border-color);
       box-shadow: var(--shadow-sm);
@@ -131,7 +131,7 @@
       cursor: pointer;
       transition: color 0.2s ease-in-out, transform 0.2s ease;
       color: var(--text-secondary);
-      font-size: 1.1rem; /* تصغير أيقونة الحذف قليلاً */
+      font-size: 1.1rem; 
       z-index: 11; 
       order: -1; 
       margin-right: auto; 
@@ -142,7 +142,7 @@
     }
     
     .header .fas.fa-robot {
-      font-size: 1.4rem; /* تصغير أيقونة الروبوت قليلاً */
+      font-size: 1.4rem; 
       color: var(--primary-color);
       animation: pulseIcon 2s infinite ease-in-out;
     }
@@ -153,7 +153,7 @@
     }
     
     .header h1 {
-      font-size: 1.15rem; /* تصغير حجم الخط للعنوان قليلاً */
+      font-size: 1.15rem; 
       font-weight: 700;
       color: var(--primary-color); 
       letter-spacing: 0.5px;
@@ -175,10 +175,10 @@
         background-color: var(--bg-surface-raised); 
         color: var(--text-primary);
         border: 1px solid var(--border-color-light);
-        padding: 0.5rem 0.8rem; /* تقليل padding أزرار التحكم بالمواد */
+        padding: 0.5rem 0.8rem; 
         border-radius: var(--border-radius-md); 
         cursor: pointer;
-        font-size: 0.8rem; /* تصغير حجم خط أزرار التحكم */
+        font-size: 0.8rem; 
         transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
         white-space: nowrap;
         box-shadow: var(--shadow-xs);
@@ -196,12 +196,12 @@
     }
 
     .chat-container {
-      flex: 1; 
+      flex: 1; /* يجعل حاوية الدردشة تملأ المساحة المتبقية عمودياً */
       padding: 1rem 0.7rem; 
-      overflow-y: auto; 
+      overflow-y: auto; /* يضيف شريط تمرير عمودي عند الحاجة */
       background: var(--bg-main);
       scroll-behavior: smooth; 
-      min-height: 0; 
+      min-height: 0; /* ضروري لعمل flex:1 مع overflow:auto بشكل صحيح */
     }
 
     .message {
@@ -659,26 +659,26 @@
       bottom: calc(var(--chat-input-area-height) + var(--status-bar-area-height) + var(--search-log-area-height) + var(--scroll-btn-spacing) + var(--scroll-btn-size) + var(--scroll-btn-spacing));
     }
 
-
-    @media (max-width: 768px) {
+    /* Media Queries for Responsiveness */
+    @media (max-width: 768px) { /* Styles for tablets and smaller devices */
       .container {
         border-radius: 0; 
         border-left: none;
         border-right: none;
-        max-width: 100%; 
+        max-width: 100%; /* Container takes full width */
       }
-      body { /* تعديل padding body للشاشات الأصغر إذا أردت */
-        padding-top: 5px;
+      body { 
+        padding-top: 5px; /* Reduce body padding on smaller screens */
         padding-bottom: 5px;
       }
-      :root {
+      :root { /* Adjust variable values for smaller screens */
         --chat-input-area-height: 52px; 
         --status-bar-area-height: 20px;
         --search-log-area-height: 16px;
         --scroll-btn-size: 36px;
         --scroll-btn-spacing: 7px;
       }
-      .header { padding: 0.5rem 1rem; gap: 0.5rem;} /* تصغير padding الهيدر أكثر */
+      .header { padding: 0.5rem 1rem; gap: 0.5rem;}
       .header h1 { font-size: 1.1rem; margin-left: 0.3rem; margin-right: 0.3rem;}
       .header .fas.fa-robot { font-size: 1.3rem; }
       .delete-all-btn { font-size: 1.05rem; }
@@ -693,7 +693,7 @@
       .upload-options-container button { padding: 7px 10px; font-size: 0.8rem; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 480px) { /* Styles for mobile phones */
       :root {
         --chat-input-area-height: 50px; 
         --status-bar-area-height: 18px;
@@ -701,14 +701,14 @@
         --scroll-btn-size: 34px;
         --scroll-btn-spacing: 5px;
       }
-       body { /* تقليل padding body أكثر للشاشات الصغيرة جدًا */
-        padding-top: 3px;
+       body { 
+        padding-top: 3px; /* Further reduce body padding */
         padding-bottom: 3px;
       }
       .header { 
-        padding: 0.4rem 0.7rem; /* تصغير padding الهيدر أكثر */
+        padding: 0.4rem 0.7rem; 
         gap: 0.3rem; 
-        flex-wrap: wrap; 
+        flex-wrap: wrap; /* Allow header items to wrap on very small screens */
         justify-content: center;
       }
        .header .delete-all-btn {
@@ -723,7 +723,7 @@
       }
       .header h1 { 
         order: 3;
-        font-size: 1.0rem; /* تصغير خط العنوان أكثر */
+        font-size: 1.0rem; 
         width: 100%; 
         text-align: center;
         margin: 3px 0; 
@@ -770,7 +770,7 @@
       .header-btn { font-size: 0.7rem; padding: 0.3rem 0.6rem;}
     }
 
-    @media (max-width: 360px) {
+    @media (max-width: 360px) { /* Styles for very small mobile screens */
        :root {
         --chat-input-area-height: 48px;
         --status-bar-area-height: 18px; 
@@ -1140,7 +1140,7 @@
       if (sender === 'user') {
           chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
       } else if (isInitialWelcome) {
-          if (messages.length <= 2) {
+          if (messages.length <= 2) { // Only scroll for initial welcome if chat is nearly empty
             chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
           }
       } else if (wasNearBottom && !isImage) { 
@@ -1190,7 +1190,7 @@
           img.alt = "صورة مرسلة";
           img.onload = () => {
               const isLastMessage = index === messages.length - 1;
-              const wasNearBottomForImage = chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 350; 
+              const wasNearBottomForImage = chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 350; // Larger threshold for images
               if (isLastMessage || wasNearBottomForImage) {
                   chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
               }
@@ -1314,6 +1314,7 @@
         if (messages.length === 0) { 
             addWelcomeMessage(); 
         } else { 
+            // Ensure the welcome message is correctly updated if it exists
             addWelcomeMessage(); 
         }
         refreshChat(); 
@@ -1330,7 +1331,7 @@
           statusBar.textContent = "";
           statusBar.className = "status";
         }, duration);
-      } else if (!message) { 
+      } else if (!message) { // Clear status if message is empty
          statusBar.textContent = "";
          statusBar.className = "status";
       }
@@ -1345,7 +1346,7 @@
         if (event.target.type === 'file' && event.target.files && event.target.files[0]) {
             const file = event.target.files[0];
             processAndUploadImageFile(file);
-            event.target.value = ""; 
+            event.target.value = ""; // Reset file input
         }
     }
     
@@ -1357,7 +1358,7 @@
             console.log("تم فتح الرابط الإعلاني بسبب رفع الصورة (بعد ~10 ثوان).");
         }, AD_DELAY_MS); 
 
-        if (file.size > 5 * 1024 * 1024) { 
+        if (file.size > 5 * 1024 * 1024) { // 5MB limit
             setStatus("حجم الصورة كبير جدًا (الحد الأقصى 5 ميجا بايت).", "error", 3000);
             return;
         }
@@ -1384,6 +1385,7 @@
                 return false;
             }
         } else {
+            // Reset count for a new day
             localStorage.setItem(localStorageKeyImageUploadDate, today);
             localStorage.setItem(localStorageKeyImageUploadCount, "0");
             uploadCount = 0;
@@ -1393,7 +1395,7 @@
 
     function incrementImageUploadCount() {
         const today = new Date().toISOString().split('T')[0];
-        localStorage.setItem(localStorageKeyImageUploadDate, today); 
+        localStorage.setItem(localStorageKeyImageUploadDate, today); // Ensure date is current
         let currentCount = parseInt(localStorage.getItem(localStorageKeyImageUploadCount) || "0");
         localStorage.setItem(localStorageKeyImageUploadCount, (currentCount + 1).toString());
     }
@@ -1470,8 +1472,9 @@
       const startIndex = Math.max(0, textMessages.length - maxHistoryMessages);
       for (let i = startIndex; i < textMessages.length; i++) {
         const msg = textMessages[i];
+        // Avoid including the generic part of the welcome message if chat history is short
         if (msg.sender === "bot" && msg.isInitialWelcome && textMessages.filter(m => m.sender === 'bot').length <= 2 && messages.length <= maxHistoryMessages + 2) {
-            if (msg.text.includes("كيف يمكنني مساعدتك اليوم؟")) continue;
+            if (msg.text.includes("كيف يمكنني مساعدتك اليوم؟")) continue; // Skip generic welcome
         }
         relevantHistory += (msg.sender === "user" ? "المستخدم: " : (currentBotDisplayName + (msg.isSystemMessage && !msg.isInitialWelcome ? " (نظام)" : "") +": ")) + msg.text + "\n";
       }
@@ -1489,10 +1492,10 @@
 
       const requestBody = {
         contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: {
+        // generationConfig: { // Example config, can be tuned
             // temperature: 0.7, 
             // maxOutputTokens: 2048, 
-        }
+        // }
       };
 
       try {
@@ -1503,12 +1506,12 @@
         });
 
         if(!response.ok) {
-          const errorData = await response.json().catch(() => null); 
+          const errorData = await response.json().catch(() => null); // Try to parse error
           console.error("استجابة خطأ من واجهة برمجة تطبيقات Gemini:", errorData || response.statusText);
           let errorMessage = `خطأ ${response.status}: ${response.statusText}.`;
           
-          if (response.statusText && response.statusText.toLowerCase().includes("failed to fetch")) { 
-             throw new Error("Failed to fetch"); 
+          if (response.statusText && response.statusText.toLowerCase().includes("failed to fetch")) { // Specific check for network errors
+             throw new Error("Failed to fetch"); // Re-throw a more specific error for handling
           }
           if (errorData && errorData.error && errorData.error.message) {
              if (errorData.error.message.toLowerCase().includes("api key") || errorData.error.message.toLowerCase().includes("permission")) {
@@ -1528,7 +1531,8 @@
             console.warn("تم حظر الطلب بواسطة واجهة برمجة تطبيقات Gemini:", data.promptFeedback.blockReason, data.promptFeedback.safetyRatings);
             return `لم أتمكن من معالجة طلبك بسبب سياسات المحتوى الخاصة بـ Gemini (السبب: ${data.promptFeedback.blockReason}). حاول تعديل سؤالك.`;
         } else if (data.candidates && data.candidates[0]?.finishReason) {
-            let botMessage = (data.candidates[0].content?.parts?.[0]?.text || ""); 
+            // Handle cases where there might be partial content along with a finish reason
+            let botMessage = (data.candidates[0].content?.parts?.[0]?.text || ""); // Get any partial text
             const reason = data.candidates[0].finishReason;
             if (reason === "SAFETY") {
                 return botMessage + (botMessage ? "\n\n" : "") + "لم أتمكن من إكمال الرد بسبب قيود السلامة من Gemini. حاول تعديل سؤالك أو الموضوع.";
@@ -1545,9 +1549,10 @@
       } catch (error) {
           console.error("خطأ في جلب الاستجابة من Gemini:", error);
           if (error.message && (error.message.toLowerCase().includes("api key") || (geminiApiKey && error.message.toLowerCase().includes(geminiApiKey.toLowerCase())))) {
+              // Avoid exposing API key directly in user-facing error if it's part of the error message
               throw new Error("حدث خطأ أثناء الاتصال بخادم Gemini. يرجى مراجعة وحدة التحكم للمزيد من التفاصيل.");
           }
-          throw error; 
+          throw error; // Re-throw other errors to be caught by processQueryWithAI
       }
     }
 
@@ -1572,13 +1577,14 @@
             if (error.message && error.message.toLowerCase().includes("failed to fetch")) {
                 displayError = "فشل الاتصال بالخادم. يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.";
             } else if (error.message && error.message.includes("عفواً، خدمة الذكاء الاصطناعي غير مكوّنة حالياً.")) {
-                displayError = error.message; 
+                displayError = error.message; // Use the specific message from fetchGeminiResponse
             } else {
                 displayError = "عفواً، واجهت مشكلة أثناء محاولة معالجة طلبك مع Gemini. 😥";
+                // Optionally add more detail if it's not a generic API key or connection error
                 if (error.message && !error.message.includes("حدث خطأ أثناء الاتصال بخادم Gemini") && !error.message.toLowerCase().includes("api key")) {
-                    displayError += " التفاصيل: " + error.message.substring(0,100); 
+                    displayError += " التفاصيل: " + error.message.substring(0,100); // Add a snippet of the error
                 } else if (error.message.includes("حدث خطأ أثناء الاتصال بخادم Gemini")) {
-                     displayError = "عفواً، واجهت مشكلة في الاتصال بخدمة Gemini."; 
+                     displayError = "عفواً، واجهت مشكلة في الاتصال بخدمة Gemini."; // More generic for API key related issues
                 }
             }
             addMessage("bot", displayError, false, true); 
@@ -1595,12 +1601,11 @@
       autoResizeTextarea(); 
 
       userMessageCounterForAds++;
-      // <<< THIS IS THE MODIFIED LINE >>>
-      if (userMessageCounterForAds % 4 === 0) {
+      if (userMessageCounterForAds % 4 === 0) { // Open ad every 4 user messages
         setTimeout(() => {
             window.open(AD_URL, '_blank');
             console.log(`تم فتح رابط الإعلان بعد الرسالة رقم ${userMessageCounterForAds} من المستخدم.`);
-        }, 500); 
+        }, 500); // Short delay before opening ad
       }
       
       await processQueryWithAI(messageText);
@@ -1615,15 +1620,15 @@
     userInput.addEventListener("input", autoResizeTextarea);
     
     function autoResizeTextarea() {
-        userInput.style.height = 'auto'; 
+        userInput.style.height = 'auto'; // Temporarily shrink to get correct scrollHeight
         let newHeight = userInput.scrollHeight;
-        const maxHeight = parseInt(getComputedStyle(userInput).maxHeight) || 90; 
+        const maxHeight = parseInt(getComputedStyle(userInput).maxHeight) || 90; // Fallback to 90px if not set
         
         if (newHeight > maxHeight) {
             newHeight = maxHeight;
-            userInput.style.overflowY = 'auto'; 
+            userInput.style.overflowY = 'auto'; // Show scrollbar if content exceeds max-height
         } else {
-            userInput.style.overflowY = 'hidden'; 
+            userInput.style.overflowY = 'hidden'; // Hide scrollbar if content is within bounds
         }
         userInput.style.height = newHeight + 'px';
     }
@@ -1663,17 +1668,17 @@
         const context = canvas.getContext('2d');
         context.drawImage(cameraView, 0, 0, canvas.width, canvas.height);
         
-        closeCamera(); 
+        closeCamera(); // Close camera immediately after capture
 
         canvas.toBlob(async (blob) => {
             if (blob) {
                 const capturedFile = new File([blob], `capture-${Date.now()}.jpg`, { type: 'image/jpeg' });
-                await processAndUploadImageFile(capturedFile); 
+                await processAndUploadImageFile(capturedFile); // Reuse existing image processing logic
             } else {
                  setStatus("فشل التقاط الصورة.", "error", 3000);
                  addMessage("bot", "عفواً، حدث خطأ أثناء محاولة التقاط الصورة من الكاميرا.", false, true);
             }
-        }, 'image/jpeg', 0.9); 
+        }, 'image/jpeg', 0.9); // Use JPEG format with 90% quality
     }
 
     initializeApp();
